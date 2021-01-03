@@ -18,7 +18,7 @@ class DishDetail extends Component {
                             return (
                                 <li>
                                     <p> {comments.comment} </p>
-                                    <p> -- {comments.author} , {comments.date} </p>
+                                    <p> -- {comments.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comments.date)))} </p>
                                 </li>
                             );
                         })}
