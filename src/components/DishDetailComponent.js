@@ -2,23 +2,30 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentForm' ;
 
 function RenderComments({comments}){
+
+    const comnts = comments.map(comment => {
+        return(
+            <li key={comment.id}>
+                <p>{comment.comment}</p>
+                <p>-- {comment.author},
+                &nbsp;
+                {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
+                </p>
+            </li>
+        );
+    })
 
     if(comments.length !== 0){
         return (
             <div>
                 <h4>Comments</h4>
                 <ul className="list-unstyled">
-                    {comments.map((comments)=>{
-                        return (
-                            <li>
-                                <p> {comments.comment} </p>
-                                <p> -- {comments.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comments.date)))} </p>
-                            </li>
-                        );
-                    })}
+                    {comnts}
                 </ul>
+                <CommentForm />
             </div>
         );
     }
